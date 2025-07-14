@@ -7,13 +7,14 @@ interface FetchMoviesResponse {
   page: number;
 }
 
+axios.defaults.baseURL = "https://api.themoviedb.org/3";
+
+
 export const fetchMovies = async (
   query: string,
   page: number
 ): Promise<FetchMoviesResponse> => {
   const myKey = import.meta.env.VITE_API_KEY;
-
-  axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
   const response = await axios.get<FetchMoviesResponse>("/search/movie", {
     params: {
@@ -25,7 +26,6 @@ export const fetchMovies = async (
       accept: "application/json",
     },
   });
-  // console.log( response);
 
   return response.data;
 };
